@@ -182,7 +182,11 @@ console.log( 'The total number of purchases is:', numPurchases );
   HINT(S):
   - Don't forget that 'purchases' can also be made in 'cash'!
 */
-var numCashSales;
+function cashCount(transaction) {
+  return transaction.paymentMethod === 'cash' && transaction.type === 'sale';
+}
+
+var numCashSales = transactions.filter(cashCount).length;
 
 console.log( 'The total number of cash sales is:', numCashSales );
 
