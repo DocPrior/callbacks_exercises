@@ -130,10 +130,10 @@ console.log( 'The total number of transactions is:', totalTransactions );
   - Not all transactions are 'sales'.
 */
 function saleType(transaction) {
-  return transaction.type === 'sale'
+  return transaction.type === 'sale';
 }
 
-var numSales = transactions.filter(saleType).length
+var numSales = transactions.filter(saleType).length;
 
 /*
   Hey, welcome to the first question!
@@ -163,7 +163,12 @@ console.log( 'The total number of sales is:', numSales );
 /*
   Calculate the total number of 'purchases'.
 */
-var numPurchases;
+
+function purchaseType(transaction) {
+  return transaction.type === 'purchase';
+}
+
+var numPurchases = transactions.filter(purchaseType).length;
 
 console.log( 'The total number of purchases is:', numPurchases );
 
