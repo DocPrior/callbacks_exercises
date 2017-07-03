@@ -200,7 +200,10 @@ console.log( 'The total number of cash sales is:', numCashSales );
   HINT(S):
   - Make sure to exclude any 'sales' made by 'credit'!
 */
-var numCreditPurchases;
+function creditPurchases(transaction) {
+  return (transaction.paymentMethod === 'credit') && (transaction.type === 'purchase')
+}
+var numCreditPurchases = transactions.filter(creditPurchases).length;
 
 console.log( 'The total number of credit purchases is:', numCreditPurchases );
 
@@ -217,10 +220,18 @@ console.log( 'The total number of credit purchases is:', numCreditPurchases );
   - The assembled array should be made up of strings, not full `transaction` objects.
   - This array is allowed to contain duplicate values.
 */
-var uniqueVendors;
 
-console.log( 'The unique vendors are:', uniqueVendors );
+function getVendor(transaction){
+    return transaction.vendor;
+}
 
+function noDuplicate( item, index, array ) {
+     return array.indexOf(item) == index;
+}
+
+var uniqueVendors = transactions.filter(getVendor).map(getVendor).filter(noDuplicate)
+
+console.log( 'The unique vendors are: ' + uniqueVendors );
 
 // --------------------------------------------------
 // QUESTION 06
@@ -234,7 +245,13 @@ console.log( 'The unique vendors are:', uniqueVendors );
   - The assembled array should be made up of strings, not full `transaction` objects.
   - Make sure that the resulting array *does not* include any duplicates.
 */
-var uniqueCustomers;
+
+function getCustomer(transaction) {
+  return transaction.customer;
+}
+
+
+var uniqueCustomers = transactions.filter(getCustomer).map(getCustomer).filter(noDuplicate);
 
 console.log( 'The unique customers are:', uniqueCustomers );
 
@@ -252,7 +269,14 @@ console.log( 'The unique customers are:', uniqueCustomers );
   - There may be more than 1 'sale' that includes 5 or more items.
   - Individual transactions do not have either `name` or `numItems` properties, we'll have to add them to the output.
 */
-var bigSpenders;
+//
+function bigTransactions(transaction) {
+  if (transaction.items.length >= 5 && transaction.type === 'sale'){
+    return { name: transaction.customer, numItems: transaction.items.length};
+  }
+}
+
+var bigSpenders = transactions.filter(bigTransactions).map(bigTransactions)
 
 console.log( 'The "big spenders" are:', bigSpenders );
 
