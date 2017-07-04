@@ -290,7 +290,13 @@ console.log( 'The "big spenders" are:', bigSpenders );
   HINT(S):
   - Transactions don't have 'prices', but their 'items' do!
 */
-var sumSales;
+function sumSalesTally(transactions) {
+    return [transactions[0].items[0].price, transactions[0].items[1].price];
+}
+
+var sumSales = sumSalesTally(transactions).reduce(function(sum, value) {
+    return sum + value;
+  }, 0);
 
 console.log( 'The sum of all sales is:', sumSales );
 
