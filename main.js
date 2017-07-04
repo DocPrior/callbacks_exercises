@@ -312,7 +312,21 @@ console.log( 'The sum of all sales is:', sumSales );
   - Make sure to include 'price' information from *all* purchases.
 */
 
-var sumPurchases;
+
+function getPurchaseItems(transaction){
+  return transaction.items.reduce(transactionTotal, 0);
+}
+
+function transactionTotal (sum, value) {
+  return value.price + sum
+}
+
+function addPrices(sum, value){
+  return (value * -1) + sum;
+}
+
+
+var sumPurchases = transactions.filter(purchaseType).map(getPurchaseItems).reduce(addPrices, 0)
 
 console.log( 'The sum of all purhcases is:', sumPurchases );
 
