@@ -400,9 +400,22 @@ function sumSmallest(transaction) {
   }
 }
 
+function sumPrices(purchases) {
+  return purchases.items.reduce(function(total, item) {
+    return item.price + total;
+  }, 0);
+}
 
-//There ARE TWO SMALLEST!
 
+var smallestNumber = transactions.filter(getPurchaseItems).map(getPurchaseItems).sort()
 
-var sumOfSmallestPurchase = transactions.filter(getPurchaseItems).map(getPurchaseItems).sort(sumSmallest)
+var smallestNumberOfItems = smallestNumber[0]
+var purchasesWithSmallestItemNumber = transactions.filter(function(purchase) {
+  return purchase.items.length === smallestNumberOfItems && purchase.type === 'purchase';
+})
+
+var sumOfSmallestPurchase =
+ purchasesWithSmallestItemNumber.map(function(purchase) {
+  return sumPrices(purchase) * -1;
+});
 console.log( 'The sum of the smallest purchase is:', sumOfSmallestPurchase );
